@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+</head>
+<body>
+    <style>
+        .list-item{
+            width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+    <ul class="list-item mdl-list">
+        <li class="mdl-list__item">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input type="text" class="mdl-textfield__input" id="title_todo" name="title_todo">
+                    <label class="mdl-textfield__label" for="title_todo">Title</label>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-button--raised" type="submit">
+                    Add
+                </button>
+            </form>
+          
+        </li>
+        {% for item in object_list %}
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                {{item.title}}
+            </span>
+            <span class="mdl-list__item-secondary-action">
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-{{item.id}}">
+                    {% if item.completed %}
+                        <input type="checkbox" id="list-checkbox-{{item.id}}" class="mdl-checkbox__input" checked/>
+                    {% else %}
+                        <input type="checkbox" id="list-checkbox-{{item.id}}" class="mdl-checkbox__input"/>
+                    {% endif %}
+                </label>
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</body>
+</html>

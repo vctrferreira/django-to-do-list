@@ -11,8 +11,7 @@ class Item(models.Model):
     created_date = models.DateField(auto_now=True)
     completed = models.BooleanField(default=None)
     completed_date = models.DateField(blank=True, null=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='todo_created_by')
-    note = models.TextField(blank=True, null=True)
+    created_by = models.CharField(max_length=40)
     priority = models.PositiveIntegerField()
 
     def __str__(self):
